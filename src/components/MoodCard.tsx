@@ -9,6 +9,16 @@ interface MoodCardProps {
 }
 
 const MoodCard = ({ mood, className }: MoodCardProps) => {
+  // Function to generate the proper Tailwind border class
+  const getBorderClass = () => {
+    if (!mood.color) return "";
+    
+    const parts = mood.color.split('-');
+    if (parts.length < 3) return "";
+    
+    return `border-b-4 border-${parts[1]}-${parts[2]}`;
+  };
+
   return (
     <div 
       className={cn(
@@ -24,7 +34,7 @@ const MoodCard = ({ mood, className }: MoodCardProps) => {
       />
       <div className={cn(
         "absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-4 z-10",
-        mood.color ? `border-b-4 border-${mood.color.split('-')[1]}-${mood.color.split('-')[2]}` : ""
+        getBorderClass()
       )}>
         <h3 className="text-lg font-bold text-white mb-1">
           {mood.name}

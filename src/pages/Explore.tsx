@@ -14,6 +14,7 @@ import { Music, Headphones, Guitar, Mic } from 'lucide-react';
 const Explore = () => {
   const [selectedGenreId, setSelectedGenreId] = useState<string | null>(null);
   const [selectedMoodId, setSelectedMoodId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<string>("genres");
 
   const handleGenreClick = (genreId: string) => {
     setSelectedGenreId(prevId => prevId === genreId ? null : genreId);
@@ -46,7 +47,7 @@ const Explore = () => {
       <div className="container px-4 pt-8">
         <h1 className="text-3xl font-bold mb-6">Explore Music</h1>
         
-        <Tabs defaultValue="genres">
+        <Tabs defaultValue="genres" onValueChange={setActiveTab}>
           <TabsList className="mb-6">
             <TabsTrigger value="genres" className="flex items-center">
               {tabIcons.genres} Genres
@@ -64,15 +65,11 @@ const Explore = () => {
           
           {/* Banner image that changes based on selected tab */}
           <div className="w-full h-32 mb-6 rounded-lg overflow-hidden">
-            <Tabs.TabsContentContext.Consumer>
-              {(value) => (
-                <img 
-                  src={tabBackgrounds[value as keyof typeof tabBackgrounds]} 
-                  alt={`${value} banner`} 
-                  className="w-full h-full object-cover"
-                />
-              )}
-            </Tabs.TabsContentContext.Consumer>
+            <img 
+              src={tabBackgrounds[activeTab as keyof typeof tabBackgrounds]} 
+              alt={`${activeTab} banner`} 
+              className="w-full h-full object-cover"
+            />
           </div>
           
           <TabsContent value="genres" className="space-y-8">
