@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import PlayerBar from '@/components/PlayerBar';
@@ -6,6 +5,7 @@ import { Radio as RadioIcon, ListMusic, Headphones } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import MusicCard from '@/components/MusicCard';
 import { topHits, trendingTracks } from '@/data';
+import InstallApp from '@/components/InstallApp';
 
 // Group tracks by genre to simulate radio stations
 const tracksByGenre = {
@@ -60,6 +60,7 @@ const Radio = () => {
   return (
     <div className="min-h-screen bg-white pb-20">
       <Navbar />
+      <InstallApp />
       
       <div className="container px-4 pt-8">
         <h1 className="text-3xl font-bold mb-6">Radio Stations</h1>
