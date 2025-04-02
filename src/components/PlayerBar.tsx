@@ -1,15 +1,64 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, Shuffle, Repeat } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
-import { currentlyPlaying } from '@/data/musicData';
+import { useAudio } from '@/contexts/AudioContext';
 
 const PlayerBar = () => {
-  // In a real app, these would be controlled by state
-  const isPlaying = false;
-  const progress = 35;
-  const volume = 70;
+  const { 
+    currentTrack, 
+    isPlaying, 
+    play, 
+    pause, 
+    resume,
+    setVolume,
+    progress,
+    duration,
+    audioRef
+  } = useAudio();
+  
+  const formatTime = (time: number) => {
+    if (!time) return '0:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+  
+  // Update volume from slider
+  const handleVolumeChange = (value: number[]) => {
+    setVolume(value[0]);
+  };
+  
+  // Update progress from slider
+  const handleProgressChange = (value: number[]) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = value[0];
+    }
+  };
+  
+  const togglePlayPause = () => {
+    if (!currentTrack) return;
+    
+    if (isPlaying) {
+      pause();
+    } else {
+      resume();
+    }
+  };
+
+  const progressPercent = duration ? (progress / duration) * 100 : 0;
+  
+  // If no track is selected, don't render controls
+  if (!currentTrack) {
+    return (
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md z-50">
+        <div className="container mx-auto px-4 h-16 md:h-20 flex items-center justify-center">
+          <p className="text-muted-foreground">Select a track to play</p>
+        </div>
+      </div>
+    );
+  }
   
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md z-50">
@@ -18,13 +67,13 @@ const PlayerBar = () => {
           {/* Track info */}
           <div className="flex items-center gap-3">
             <img 
-              src={currentlyPlaying.cover}
-              alt={currentlyPlaying.title}
+              src={currentTrack.cover}
+              alt={currentTrack.title}
               className="h-10 w-10 rounded object-cover"
             />
             <div className="overflow-hidden">
-              <h4 className="text-sm font-medium truncate">{currentlyPlaying.title}</h4>
-              <p className="text-xs text-muted-foreground truncate">{currentlyPlaying.artist}</p>
+              <h4 className="text-sm font-medium truncate">{currentTrack.title}</h4>
+              <p className="text-xs text-muted-foreground truncate">{currentTrack.artist}</p>
             </div>
           </div>
           
@@ -39,7 +88,11 @@ const PlayerBar = () => {
                 <SkipBack className="h-4 w-4" />
               </Button>
               
-              <Button size="icon" className="h-9 w-9 rounded-full bg-music-red text-white hover:bg-music-red-dark">
+              <Button 
+                size="icon" 
+                className="h-9 w-9 rounded-full bg-music-red text-white hover:bg-music-red-dark"
+                onClick={togglePlayPause}
+              >
                 {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
               </Button>
               
@@ -53,14 +106,15 @@ const PlayerBar = () => {
             </div>
             
             <div className="hidden md:flex w-full max-w-md mt-1 items-center gap-2">
-              <span className="text-xs text-muted-foreground">1:08</span>
+              <span className="text-xs text-muted-foreground">{formatTime(progress)}</span>
               <Slider
-                defaultValue={[progress]}
+                value={[progressPercent]}
                 max={100}
                 step={1}
                 className="w-full"
+                onValueChange={handleProgressChange}
               />
-              <span className="text-xs text-muted-foreground">{currentlyPlaying.duration}</span>
+              <span className="text-xs text-muted-foreground">{currentTrack.duration}</span>
             </div>
           </div>
           
@@ -68,10 +122,11 @@ const PlayerBar = () => {
           <div className="flex items-center justify-end gap-2">
             <Volume2 className="hidden md:block h-4 w-4 text-gray-500" />
             <Slider
-              defaultValue={[volume]}
+              defaultValue={[70]}
               max={100}
               step={1}
               className="hidden md:flex w-24"
+              onValueChange={handleVolumeChange}
             />
           </div>
         </div>

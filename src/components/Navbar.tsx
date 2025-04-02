@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { Search, Menu, X, Home, Compass, Radio, Mic, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,11 +8,13 @@ import { Button } from '@/components/ui/button';
 interface NavItemProps {
   icon: React.ReactNode;
   label: string;
+  to: string;
   active?: boolean;
 }
 
-const NavItem = ({ icon, label, active }: NavItemProps) => (
-  <div
+const NavItem = ({ icon, label, to, active }: NavItemProps) => (
+  <Link
+    to={to}
     className={cn(
       "flex items-center gap-3 px-4 py-2 rounded-lg transition-colors",
       active 
@@ -21,25 +24,30 @@ const NavItem = ({ icon, label, active }: NavItemProps) => (
   >
     {icon}
     <span className="text-sm">{label}</span>
-  </div>
+  </Link>
 );
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full bg-orange-red-gradient shadow-md">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-xl text-white">WaveBeats</span>
+            <Link to="/" className="font-bold text-xl text-white">WaveBeats</Link>
           </div>
           
           <div className="hidden md:flex items-center space-x-1">
-            <NavItem icon={<Home size={18} />} label="Home" active />
-            <NavItem icon={<Compass size={18} />} label="Explore" />
-            <NavItem icon={<Radio size={18} />} label="Radio" />
-            <NavItem icon={<Mic size={18} />} label="Artists" />
+            <NavItem icon={<Home size={18} />} label="Home" to="/" active={isActive('/')} />
+            <NavItem icon={<Compass size={18} />} label="Explore" to="/explore" active={isActive('/explore')} />
+            <NavItem icon={<Radio size={18} />} label="Radio" to="/radio" active={isActive('/radio')} />
+            <NavItem icon={<Mic size={18} />} label="Artists" to="/artists" active={isActive('/artists')} />
           </div>
         </div>
 
@@ -82,11 +90,11 @@ const Navbar = () => {
             </div>
             
             <div className="space-y-2">
-              <NavItem icon={<Home size={20} />} label="Home" active />
-              <NavItem icon={<Compass size={20} />} label="Explore" />
-              <NavItem icon={<Radio size={20} />} label="Radio" />
-              <NavItem icon={<Mic size={20} />} label="Artists" />
-              <NavItem icon={<User size={20} />} label="Profile" />
+              <NavItem icon={<Home size={20} />} label="Home" to="/" active={isActive('/')} />
+              <NavItem icon={<Compass size={20} />} label="Explore" to="/explore" active={isActive('/explore')} />
+              <NavItem icon={<Radio size={20} />} label="Radio" to="/radio" active={isActive('/radio')} />
+              <NavItem icon={<Mic size={20} />} label="Artists" to="/artists" active={isActive('/artists')} />
+              <NavItem icon={<User size={20} />} label="Profile" to="/profile" active={isActive('/profile')} />
             </div>
             
             <Button className="w-full mt-4 bg-white text-music-red-dark hover:bg-white/90">

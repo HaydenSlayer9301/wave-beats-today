@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { Play, MoreHorizontal } from 'lucide-react';
+import { Play, Pause, MoreHorizontal } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Track } from '@/data/musicData';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { useAudio } from '@/contexts/AudioContext';
 
 interface MusicCardProps {
   track: Track;
@@ -11,6 +12,15 @@ interface MusicCardProps {
 }
 
 const MusicCard = ({ track, className }: MusicCardProps) => {
+  const { play, isPlaying, currentTrack } = useAudio();
+  
+  const isCurrentlyPlaying = isPlaying && currentTrack?.id === track.id;
+
+  const handlePlay = (e: React.MouseEvent) => {
+    e.preventDefault();
+    play(track);
+  };
+
   return (
     <div className={cn("music-card group", className)}>
       <div className="relative aspect-square overflow-hidden">
@@ -19,8 +29,11 @@ const MusicCard = ({ track, className }: MusicCardProps) => {
           alt={`${track.title} by ${track.artist}`}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <button className="music-card-play">
-          <Play className="h-4 w-4" fill="white" />
+        <button className="music-card-play" onClick={handlePlay}>
+          {isCurrentlyPlaying ? 
+            <Pause className="h-4 w-4" fill="white" /> : 
+            <Play className="h-4 w-4" fill="white" />
+          }
         </button>
       </div>
       <div className="p-3">
