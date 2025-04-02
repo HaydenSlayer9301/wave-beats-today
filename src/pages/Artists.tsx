@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import PlayerBar from '@/components/PlayerBar';
-import { featuredArtists } from '@/data/musicData';
+import { featuredArtists } from '@/data';
 import { Button } from '@/components/ui/button';
 import { Music, Play } from 'lucide-react';
 

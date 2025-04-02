@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import GenreCard from './GenreCard';
-import { genres } from '@/data/musicData';
+import { genres } from '@/data';
 import GenreTracksList from './GenreTracksList';
 import { Link } from 'react-router-dom';
 

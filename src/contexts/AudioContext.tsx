@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useRef } from 'react';
-import { Track } from '@/data/musicData';
+import { Track } from '@/data';
 
 interface AudioContextType {
   currentTrack: Track | null;
@@ -23,7 +23,6 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const play = (track: Track) => {
-    // If we're already playing this track, just toggle play/pause
     if (currentTrack && currentTrack.id === track.id) {
       if (isPlaying) {
         pause();
@@ -33,17 +32,12 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    // Otherwise, play the new track
     setCurrentTrack(track);
     setIsPlaying(true);
     
-    // We need to wait for the audio element to load the new source
     if (audioRef.current) {
-      // In a real app, this would be the actual audio file URL
-      // For demonstration, we'll create a fake URL based on the track ID
       audioRef.current.src = `https://example.com/audio/${track.id}.mp3`;
       
-      // For this demo, we'll just simulate playing without actual audio files
       audioRef.current.oncanplay = () => {
         audioRef.current?.play().catch(err => {
           console.error('Error playing audio:', err);
