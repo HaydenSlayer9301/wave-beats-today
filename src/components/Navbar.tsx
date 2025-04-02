@@ -2,8 +2,18 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from "@/lib/utils";
-import { Search, Menu, X, Home, Compass, Radio, Mic, User } from 'lucide-react';
+import { Search, Menu, X, Home, Compass, Radio, Mic, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface NavItemProps {
   icon: React.ReactNode;
@@ -30,9 +40,14 @@ const NavItem = ({ icon, label, to, active }: NavItemProps) => (
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, profile, signOut } = useAuth();
   
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
   };
 
   return (
@@ -61,9 +76,46 @@ const Navbar = () => {
             />
           </div>
           
-          <Button className="hidden md:flex h-9 px-4 bg-white text-music-red-dark hover:bg-white/90">
-            Sign In
-          </Button>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={profile?.avatar_url} alt={profile?.username || user.email} />
+                    <AvatarFallback>{profile?.username?.[0] || user.email?.[0]}</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium">{profile?.username || user.email}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {user.email}
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/profile">
+                    <User className="mr-2 h-4 w-4" />
+                    <span>Profile</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSignOut}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button 
+              asChild
+              className="h-9 px-4 bg-white text-music-red-dark hover:bg-white/90"
+            >
+              <Link to="/auth">Sign In</Link>
+            </Button>
+          )}
           
           <Button
             variant="ghost"
@@ -97,9 +149,21 @@ const Navbar = () => {
               <NavItem icon={<User size={20} />} label="Profile" to="/profile" active={isActive('/profile')} />
             </div>
             
-            <Button className="w-full mt-4 bg-white text-music-red-dark hover:bg-white/90">
-              Sign In
-            </Button>
+            {user ? (
+              <Button 
+                className="w-full mt-4 bg-white text-music-red-dark hover:bg-white/90"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </Button>
+            ) : (
+              <Button 
+                asChild 
+                className="w-full mt-4 bg-white text-music-red-dark hover:bg-white/90"
+              >
+                <Link to="/auth">Sign In</Link>
+              </Button>
+            )}
           </div>
         </div>
       )}
