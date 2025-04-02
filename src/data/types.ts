@@ -8,6 +8,10 @@ export interface Track {
   cover: string;
   duration: string;
   plays: string;
+  preview_url?: string;  // Optional preview URL for the track
+  external_urls?: {      // Optional external URLs
+    spotify: string;
+  };
 }
 
 export interface Genre {
