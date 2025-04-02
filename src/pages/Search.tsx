@@ -5,6 +5,7 @@ import { Track } from '@/data/types';
 import { useQuery } from '@tanstack/react-query';
 import Navbar from '@/components/Navbar';
 import MusicCard from '@/components/MusicCard';
+import NowPlayingVisualizer from '@/components/NowPlayingVisualizer';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search as SearchIcon } from 'lucide-react';
@@ -21,11 +22,16 @@ interface SpotifyTrack {
     images: Array<{ url: string }>;
   };
   duration_ms: number;
+  preview_url?: string;
+  external_urls: {
+    spotify: string;
+  };
 }
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const { toast } = useToast();
 
   const { data, isLoading, error, refetch } = useQuery({
@@ -54,6 +60,11 @@ const Search = () => {
     }
   };
 
+  // Handle audio play
+  const handlePlay = (trackId: string) => {
+    setCurrentlyPlaying(currentlyPlaying === trackId ? null : trackId);
+  };
+
   // Convert Spotify track format to our app's Track format
   const formatTracks = (spotifyTracks: SpotifyTrack[]): Track[] => {
     return spotifyTracks.map(track => ({
@@ -64,6 +75,8 @@ const Search = () => {
       cover: track.album.images[0]?.url || 'https://placehold.co/300x300/gray/white?text=Album',
       duration: formatDuration(track.duration_ms),
       plays: 'N/A',
+      preview_url: track.preview_url,
+      external_urls: track.external_urls,
     }));
   };
 
@@ -122,9 +135,49 @@ const Search = () => {
         {tracks.length > 0 && (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Results for "{searchTerm}"</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {tracks.map((track) => (
-                <MusicCard key={track.id} track={track} />
+                <motion.div
+                  key={track.id}
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white p-4 rounded-xl shadow-md"
+                >
+                  <img 
+                    src={track.cover} 
+                    alt={track.title} 
+                    className="w-full h-48 object-cover rounded mb-4" 
+                  />
+                  <h2 className="text-lg font-semibold">{track.title}</h2>
+                  <p className="text-sm text-gray-500">{track.artist}</p>
+                  
+                  <div className="mt-3">
+                    {track.external_urls && (
+                      <a 
+                        href={track.external_urls.spotify} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline text-sm"
+                      >
+                        Open in Spotify
+                      </a>
+                    )}
+                  </div>
+                  
+                  {track.preview_url && (
+                    <div className="mt-2">
+                      <audio 
+                        controls 
+                        className="w-full" 
+                        src={track.preview_url}
+                        onPlay={() => handlePlay(track.id)} 
+                        onPause={() => setCurrentlyPlaying(null)}
+                      >
+                        <source src={track.preview_url} type="audio/mpeg" />
+                      </audio>
+                      {currentlyPlaying === track.id && <NowPlayingVisualizer />}
+                    </div>
+                  )}
+                </motion.div>
               ))}
             </div>
           </div>

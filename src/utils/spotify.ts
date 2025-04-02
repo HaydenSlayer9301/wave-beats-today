@@ -123,8 +123,11 @@ function getMockSearchResults(query: string) {
           ],
         },
         duration_ms: 180000, // 3 minutes
+        preview_url: "https://p.scdn.co/mp3-preview/sample-preview.mp3", // Mock preview URL
+        external_urls: {
+          spotify: `https://open.spotify.com/track/${track.id}`
+        }
       })),
     },
   };
 }
-
