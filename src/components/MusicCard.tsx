@@ -11,7 +11,7 @@ interface MusicCardProps {
 
 const MusicCard = ({ track, className }: MusicCardProps) => {
   return (
-    <div className={cn("music-card", className)}>
+    <div className={cn("music-card group", className)}>
       <div className="relative aspect-square overflow-hidden">
         <img 
           src={track.cover}
