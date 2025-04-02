@@ -40,6 +40,36 @@ export const getSpotifyToken = async () => {
 };
 
 /**
+ * Search Spotify for tracks matching the query
+ * @param query The search query
+ * @param token Spotify API token
+ * @returns Promise containing the tracks that match the query
+ */
+export const searchSpotify = async (query: string, token: string) => {
+  try {
+    const res = await fetch(
+      `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    
+    if (!res.ok) {
+      console.warn("Error searching Spotify - using mock data");
+      return getMockSearchResults(query);
+    }
+    
+    const data = await res.json();
+    return data.tracks.items;
+  } catch (error) {
+    console.error("Error searching Spotify:", error);
+    return getMockSearchResults(query);
+  }
+};
+
+/**
  * Example function to search for tracks
  * @param query Search query
  * @returns Promise containing search results
