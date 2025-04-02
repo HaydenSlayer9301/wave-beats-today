@@ -2,17 +2,25 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import PlayerBar from '@/components/PlayerBar';
-import { genres } from '@/data/musicData';
+import { genres, moods, topCharts, top50Chart } from '@/data/musicData';
 import GenreCard from '@/components/GenreCard';
+import MoodCard from '@/components/MoodCard';
 import GenreTracksList from '@/components/GenreTracksList';
+import MoodTracksList from '@/components/MoodTracksList';
+import ChartsList from '@/components/ChartsList';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Music, Headphones, Guitar, Mic } from 'lucide-react';
 
 const Explore = () => {
   const [selectedGenreId, setSelectedGenreId] = useState<string | null>(null);
+  const [selectedMoodId, setSelectedMoodId] = useState<string | null>(null);
 
   const handleGenreClick = (genreId: string) => {
     setSelectedGenreId(prevId => prevId === genreId ? null : genreId);
+  };
+
+  const handleMoodClick = (moodId: string) => {
+    setSelectedMoodId(prevId => prevId === moodId ? null : moodId);
   };
 
   // Tab icon mapping
@@ -21,6 +29,14 @@ const Explore = () => {
     moods: <Headphones className="h-4 w-4 mr-2" />,
     new: <Guitar className="h-4 w-4 mr-2" />,
     charts: <Mic className="h-4 w-4 mr-2" />
+  };
+
+  // Tab background images
+  const tabBackgrounds = {
+    genres: "https://placehold.co/1200x200/ea384c/ffffff?text=Genres",
+    moods: "https://placehold.co/1200x200/60a5fa/ffffff?text=Moods",
+    new: "https://placehold.co/1200x200/22c55e/ffffff?text=New+Releases",
+    charts: "https://placehold.co/1200x200/f97316/ffffff?text=Charts"
   };
 
   return (
@@ -46,6 +62,19 @@ const Explore = () => {
             </TabsTrigger>
           </TabsList>
           
+          {/* Banner image that changes based on selected tab */}
+          <div className="w-full h-32 mb-6 rounded-lg overflow-hidden">
+            <Tabs.TabsContentContext.Consumer>
+              {(value) => (
+                <img 
+                  src={tabBackgrounds[value as keyof typeof tabBackgrounds]} 
+                  alt={`${value} banner`} 
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </Tabs.TabsContentContext.Consumer>
+          </div>
+          
           <TabsContent value="genres" className="space-y-8">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {genres.map((genre) => (
@@ -65,16 +94,31 @@ const Explore = () => {
             {selectedGenreId && <GenreTracksList genreId={selectedGenreId} />}
           </TabsContent>
           
-          <TabsContent value="moods" className="p-4 text-center">
-            <p className="text-muted-foreground">Mood-based exploration coming soon!</p>
+          <TabsContent value="moods" className="space-y-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {moods.map((mood) => (
+                <div 
+                  key={mood.id} 
+                  onClick={() => handleMoodClick(mood.id)}
+                  className="cursor-pointer"
+                >
+                  <MoodCard 
+                    mood={mood} 
+                    className={selectedMoodId === mood.id ? "ring-4 ring-music-red" : ""}
+                  />
+                </div>
+              ))}
+            </div>
+            
+            {selectedMoodId && <MoodTracksList moodId={selectedMoodId} />}
           </TabsContent>
           
           <TabsContent value="new" className="p-4 text-center">
             <p className="text-muted-foreground">New releases coming soon!</p>
           </TabsContent>
           
-          <TabsContent value="charts" className="p-4 text-center">
-            <p className="text-muted-foreground">Charts coming soon!</p>
+          <TabsContent value="charts" className="space-y-8">
+            <ChartsList top10Tracks={topCharts} top50Tracks={top50Chart} />
           </TabsContent>
         </Tabs>
       </div>
