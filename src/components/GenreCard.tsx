@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Genre } from '@/data/musicData';
+import { Genre } from '@/data/types';
 
 interface GenreCardProps {
   genre: Genre;

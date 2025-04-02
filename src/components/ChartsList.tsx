@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import MusicCard from './MusicCard';
-import { Track } from '@/data/musicData';
+import { Track } from '@/data/types';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 

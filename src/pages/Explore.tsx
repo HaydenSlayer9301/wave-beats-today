@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import PlayerBar from '@/components/PlayerBar';
-import { genres, moods, topCharts, top50Chart } from '@/data/musicData';
+import { genres } from '@/data/genres';
+import { moods } from '@/data/moods';
+import { topCharts, top50Chart } from '@/data/charts';
 import GenreCard from '@/components/GenreCard';
 import MoodCard from '@/components/MoodCard';
 import GenreTracksList from '@/components/GenreTracksList';

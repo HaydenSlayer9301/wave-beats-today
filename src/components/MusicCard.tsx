@@ -2,7 +2,7 @@
 import React from 'react';
 import { Play, Pause, MoreHorizontal } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Track } from '@/data/musicData';
+import { Track } from '@/data/types';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useAudio } from '@/contexts/AudioContext';
 

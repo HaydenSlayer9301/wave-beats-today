@@ -1,7 +1,7 @@
 
 import React from 'react';
 import MusicCard from './MusicCard';
-import { Track } from '@/data/musicData';
+import { Track } from '@/data/types';
 import { useQuery } from '@tanstack/react-query';
 
 interface GenreTracksListProps {

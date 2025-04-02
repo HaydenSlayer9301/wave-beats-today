@@ -2,7 +2,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import MusicCard from './MusicCard';
-import { trendingTracks } from '@/data/musicData';
+import { trendingTracks } from '@/data/tracks';
 
 interface SectionHeaderProps {
   title: string;

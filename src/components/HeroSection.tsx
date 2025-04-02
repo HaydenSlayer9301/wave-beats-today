@@ -2,7 +2,7 @@
 import React from 'react';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { topHits } from '@/data/musicData';
+import { topHits } from '@/data/tracks';
 
 const HeroSection = () => {
   const featuredTrack = topHits[0];

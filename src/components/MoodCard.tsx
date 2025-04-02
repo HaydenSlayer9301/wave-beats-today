@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Mood } from '@/data/musicData';
+import { Mood } from '@/data/types';
 
 interface MoodCardProps {
   mood: Mood;
