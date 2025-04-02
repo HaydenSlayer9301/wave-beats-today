@@ -7,20 +7,14 @@ import { moods } from '@/data/moods';
 import { topCharts, top50Chart } from '@/data/charts';
 import GenreCard from '@/components/GenreCard';
 import MoodCard from '@/components/MoodCard';
-import GenreTracksList from '@/components/GenreTracksList';
 import MoodTracksList from '@/components/MoodTracksList';
 import ChartsList from '@/components/ChartsList';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Music, Headphones, Guitar, Mic } from 'lucide-react';
 
 const Explore = () => {
-  const [selectedGenreId, setSelectedGenreId] = useState<string | null>(null);
   const [selectedMoodId, setSelectedMoodId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("genres");
-
-  const handleGenreClick = (genreId: string) => {
-    setSelectedGenreId(prevId => prevId === genreId ? null : genreId);
-  };
 
   const handleMoodClick = (moodId: string) => {
     setSelectedMoodId(prevId => prevId === moodId ? null : moodId);
@@ -77,20 +71,12 @@ const Explore = () => {
           <TabsContent value="genres" className="space-y-8">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {genres.map((genre) => (
-                <div 
+                <GenreCard
                   key={genre.id} 
-                  onClick={() => handleGenreClick(genre.id)}
-                  className="cursor-pointer"
-                >
-                  <GenreCard 
-                    genre={genre} 
-                    className={selectedGenreId === genre.id ? "ring-4 ring-music-red" : ""}
-                  />
-                </div>
+                  genre={genre}
+                />
               ))}
             </div>
-            
-            {selectedGenreId && <GenreTracksList genreId={selectedGenreId} />}
           </TabsContent>
           
           <TabsContent value="moods" className="space-y-8">

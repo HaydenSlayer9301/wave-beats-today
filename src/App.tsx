@@ -12,6 +12,7 @@ import Radio from "./pages/Radio";
 import Artists from "./pages/Artists";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import GenrePage from "./pages/GenrePage";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
               <Route path="/explore" element={<Explore />} />
               <Route path="/radio" element={<Radio />} />
               <Route path="/artists" element={<Artists />} />
+              <Route path="/genre/:id" element={<GenrePage />} />
               <Route path="/auth" element={<Auth />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

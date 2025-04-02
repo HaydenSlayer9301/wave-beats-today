@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import GenreCard from './GenreCard';
 import { genres } from '@/data';
-import GenreTracksList from './GenreTracksList';
 import { Link } from 'react-router-dom';
 
 interface SectionHeaderProps {
@@ -23,12 +22,6 @@ const SectionHeader = ({ title, subtitle, action }: SectionHeaderProps) => (
 );
 
 const GenresSection = () => {
-  const [selectedGenreId, setSelectedGenreId] = useState<string | null>(null);
-
-  const handleGenreClick = (genreId: string) => {
-    setSelectedGenreId(prevId => prevId === genreId ? null : genreId);
-  };
-
   return (
     <section className="py-12 bg-gray-50/50">
       <div className="container px-4">
@@ -47,24 +40,12 @@ const GenresSection = () => {
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {genres.map((genre) => (
-            <div 
+            <GenreCard 
               key={genre.id} 
-              onClick={() => handleGenreClick(genre.id)}
-              className="cursor-pointer"
-            >
-              <GenreCard 
-                genre={genre} 
-                className={selectedGenreId === genre.id ? "ring-4 ring-music-red" : ""}
-              />
-            </div>
+              genre={genre}
+            />
           ))}
         </div>
-        
-        {selectedGenreId && (
-          <div className="mt-8">
-            <GenreTracksList genreId={selectedGenreId} />
-          </div>
-        )}
       </div>
     </section>
   );

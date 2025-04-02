@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Genre } from '@/data/types';
+import { Link } from 'react-router-dom';
 
 interface GenreCardProps {
   genre: Genre;
@@ -10,9 +11,10 @@ interface GenreCardProps {
 
 const GenreCard = ({ genre, className }: GenreCardProps) => {
   return (
-    <div 
+    <Link 
+      to={`/genre/${genre.id}`}
       className={cn(
-        "genre-card relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300", 
+        "genre-card relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 block", 
         className
       )}
       style={{ aspectRatio: '1/1' }}
@@ -30,7 +32,7 @@ const GenreCard = ({ genre, className }: GenreCardProps) => {
           {genre.description}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
