@@ -1,4 +1,3 @@
-
 export interface Track {
   id: string;
   title: string;
@@ -189,6 +188,7 @@ export const currentlyPlaying: Track = {
   id: "2",
   title: "Midnight Rain",
   artist: "Taylor Swift",
+  artistImage: "https://images.unsplash.com/photo-1615809398537-8695989a1b4f?w=150&h=150&fit=crop&auto=format",
   cover: "https://placehold.co/400x400/fb923c/ffffff?text=Taylor+Swift",
   duration: "3:15",
   plays: "1.9M"
