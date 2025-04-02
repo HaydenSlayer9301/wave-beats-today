@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from "@/lib/utils";
@@ -63,17 +62,22 @@ const Navbar = () => {
             <NavItem icon={<Compass size={18} />} label="Explore" to="/explore" active={isActive('/explore')} />
             <NavItem icon={<Radio size={18} />} label="Radio" to="/radio" active={isActive('/radio')} />
             <NavItem icon={<Mic size={18} />} label="Artists" to="/artists" active={isActive('/artists')} />
+            <NavItem icon={<Search size={18} />} label="Search" to="/search" active={isActive('/search')} />
           </div>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="relative hidden md:block">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
-            <input
-              type="text"
-              placeholder="Search music..."
-              className="h-9 w-[200px] rounded-full bg-white/10 px-9 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/20"
-            />
+            <Link to="/search">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
+              <input
+                type="text"
+                placeholder="Search music..."
+                className="h-9 w-[200px] rounded-full bg-white/10 px-9 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/20"
+                onClick={(e) => e.preventDefault()}
+                readOnly
+              />
+            </Link>
           </div>
           
           {user ? (
@@ -128,24 +132,28 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex flex-col pt-16 bg-orange-red-gradient md:hidden">
           <div className="container px-4 py-4 space-y-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
-              <input
-                type="text"
-                placeholder="Search music..."
-                className="h-10 w-full rounded-full bg-white/10 px-9 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/20"
-              />
-            </div>
+            <Link to="/search">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
+                <input
+                  type="text"
+                  placeholder="Search music..."
+                  className="h-10 w-full rounded-full bg-white/10 px-9 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/20"
+                  readOnly
+                  onClick={(e) => e.preventDefault()}
+                />
+              </div>
+            </Link>
             
             <div className="space-y-2">
               <NavItem icon={<Home size={20} />} label="Home" to="/" active={isActive('/')} />
               <NavItem icon={<Compass size={20} />} label="Explore" to="/explore" active={isActive('/explore')} />
               <NavItem icon={<Radio size={20} />} label="Radio" to="/radio" active={isActive('/radio')} />
               <NavItem icon={<Mic size={20} />} label="Artists" to="/artists" active={isActive('/artists')} />
+              <NavItem icon={<Search size={20} />} label="Search" to="/search" active={isActive('/search')} />
               <NavItem icon={<User size={20} />} label="Profile" to="/profile" active={isActive('/profile')} />
             </div>
             

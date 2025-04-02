@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import Explore from "./pages/Explore";
 import Radio from "./pages/Radio";
 import Artists from "./pages/Artists";
+import Search from "./pages/Search";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import GenrePage from "./pages/GenrePage";
@@ -29,6 +30,7 @@ const App = () => (
               <Route path="/explore" element={<Explore />} />
               <Route path="/radio" element={<Radio />} />
               <Route path="/artists" element={<Artists />} />
+              <Route path="/search" element={<Search />} />
               <Route path="/genre/:id" element={<GenrePage />} />
               <Route path="/auth" element={<Auth />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
