@@ -2,14 +2,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import type { Session, User } from '@supabase/supabase-js';
+import type { Database } from '@/integrations/supabase/types';
 
-interface Profile {
-  id: string;
-  username: string | null;
-  avatar_url: string | null;
-  created_at: string;
-  updated_at: string;
-}
+type Profile = Database['public']['Tables']['profiles']['Row'];
 
 interface AuthContextType {
   session: Session | null;
@@ -78,7 +73,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return;
       }
       
-      setProfile(data as Profile);
+      setProfile(data);
     } catch (error) {
       console.error('Profile fetch error:', error);
     }
