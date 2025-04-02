@@ -3,6 +3,7 @@ import React from 'react';
 import { Play, MoreHorizontal } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Track } from '@/data/musicData';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 interface MusicCardProps {
   track: Track;
@@ -28,9 +29,12 @@ const MusicCard = ({ track, className }: MusicCardProps) => {
             <h3 className="font-medium text-sm truncate" title={track.title}>
               {track.title}
             </h3>
-            <p className="text-xs text-muted-foreground truncate" title={track.artist}>
-              {track.artist}
-            </p>
+            <div className="mt-1">
+              <Avatar className="h-6 w-6">
+                <AvatarImage src={track.artistImage} alt={track.artist} />
+                <AvatarFallback>{track.artist.charAt(0)}</AvatarFallback>
+              </Avatar>
+            </div>
           </div>
           <button className="text-muted-foreground hover:text-foreground transition-colors">
             <MoreHorizontal className="h-4 w-4" />
