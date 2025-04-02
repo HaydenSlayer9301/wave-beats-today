@@ -24,19 +24,24 @@ declare global {
 
 // Initialize window.musicData
 if (typeof window !== 'undefined') {
-  const { topHits, trendingTracks } = require('./tracks');
-  const { genres } = require('./genres');
-  const { featuredArtists } = require('./artists');
-  const { moods } = require('./moods');
-  const { topCharts, top50Chart } = require('./charts');
-  
-  window.musicData = {
-    topHits,
-    trendingTracks,
-    genres,
-    featuredArtists,
-    moods,
-    topCharts,
-    top50Chart
-  };
+  // Import modules using ES modules syntax
+  import('./tracks').then(tracks => {
+    import('./genres').then(genres => {
+      import('./moods').then(moods => {
+        import('./charts').then(charts => {
+          import('./artists').then(artists => {
+            window.musicData = {
+              topHits: tracks.topHits,
+              trendingTracks: tracks.trendingTracks,
+              genres: genres.genres,
+              featuredArtists: artists.featuredArtists,
+              moods: moods.moods,
+              topCharts: charts.topCharts,
+              top50Chart: charts.top50Chart
+            };
+          });
+        });
+      });
+    });
+  });
 }
