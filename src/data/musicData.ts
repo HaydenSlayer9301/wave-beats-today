@@ -1,3 +1,4 @@
+
 export interface Track {
   id: string;
   title: string;
@@ -193,3 +194,25 @@ export const currentlyPlaying: Track = {
   duration: "3:15",
   plays: "1.9M"
 };
+
+// Make data available globally for simulated API calls
+declare global {
+  interface Window {
+    musicData: {
+      topHits: Track[];
+      trendingTracks: Track[];
+      genres: Genre[];
+      featuredArtists: FeaturedArtist[];
+    };
+  }
+}
+
+// Export data to window for simulated API
+if (typeof window !== 'undefined') {
+  window.musicData = {
+    topHits,
+    trendingTracks,
+    genres,
+    featuredArtists
+  };
+}

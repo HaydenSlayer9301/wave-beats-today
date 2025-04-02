@@ -11,7 +11,10 @@ interface GenreCardProps {
 const GenreCard = ({ genre, className }: GenreCardProps) => {
   return (
     <div 
-      className={cn("genre-card", className)}
+      className={cn(
+        "genre-card relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300", 
+        className
+      )}
       style={{ aspectRatio: '1/1' }}
     >
       <img 
@@ -19,7 +22,7 @@ const GenreCard = ({ genre, className }: GenreCardProps) => {
         alt={genre.name}
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 flex flex-col justify-end p-4 z-10">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-4 z-10">
         <h3 className="text-lg font-bold text-white mb-1">
           {genre.name}
         </h3>
