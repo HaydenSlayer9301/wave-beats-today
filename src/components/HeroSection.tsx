@@ -30,10 +30,10 @@ const HeroSection = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Enhanced animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-800 to-rose-800 -z-10">
+      {/* Enhanced animated background - brighter colors */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/80 to-rose-500/80 -z-10">
         <motion.div 
-          className="absolute w-64 h-64 rounded-full bg-orange-700/60 blur-3xl"
+          className="absolute w-64 h-64 rounded-full bg-orange-400/50 blur-3xl"
           animate={{
             x: ['5%', '30%', '15%', '40%', '5%'],
             y: ['10%', '30%', '60%', '20%', '10%'],
@@ -47,7 +47,7 @@ const HeroSection = () => {
         />
         
         <motion.div 
-          className="absolute w-72 h-72 rounded-full bg-rose-700/50 blur-3xl"
+          className="absolute w-72 h-72 rounded-full bg-rose-500/40 blur-3xl"
           animate={{
             x: ['70%', '40%', '60%', '30%', '70%'],
             y: ['20%', '50%', '30%', '60%', '20%'],
@@ -62,7 +62,7 @@ const HeroSection = () => {
         />
         
         <motion.div 
-          className="absolute w-80 h-80 rounded-full bg-amber-700/40 blur-3xl"
+          className="absolute w-80 h-80 rounded-full bg-amber-400/30 blur-3xl"
           animate={{
             x: ['35%', '65%', '25%', '55%', '35%'],
             y: ['60%', '20%', '40%', '70%', '60%'],
@@ -76,7 +76,7 @@ const HeroSection = () => {
           }}
         />
         
-        {/* Cursor following bubbles */}
+        {/* Cursor following bubbles - darker on hover */}
         {isHovering && (
           <>
             <motion.div

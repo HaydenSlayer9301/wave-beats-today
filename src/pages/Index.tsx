@@ -14,12 +14,12 @@ import { motion } from 'framer-motion';
 const Index = () => {
   return (
     <div className="min-h-screen bg-white pb-20">
-      {/* Enhanced Lava Lamp Background with multiple bubbles */}
+      {/* Enhanced Lava Lamp Background with brighter bubbles */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-rose-500/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-300/20 to-rose-300/20" />
         
         <motion.div 
-          className="absolute w-96 h-96 rounded-full bg-orange-400/20 blur-3xl"
+          className="absolute w-96 h-96 rounded-full bg-orange-300/30 blur-3xl"
           animate={{
             x: ['0%', '50%', '20%', '80%', '0%'],
             y: ['0%', '40%', '80%', '20%', '0%'],
@@ -33,7 +33,7 @@ const Index = () => {
         />
         
         <motion.div 
-          className="absolute w-80 h-80 rounded-full bg-rose-500/20 blur-3xl"
+          className="absolute w-80 h-80 rounded-full bg-rose-300/30 blur-3xl"
           animate={{
             x: ['80%', '30%', '70%', '10%', '80%'],
             y: ['10%', '60%', '30%', '70%', '10%'],
@@ -48,7 +48,7 @@ const Index = () => {
         />
         
         <motion.div 
-          className="absolute w-72 h-72 rounded-full bg-amber-400/20 blur-3xl"
+          className="absolute w-72 h-72 rounded-full bg-amber-300/30 blur-3xl"
           animate={{
             x: ['20%', '70%', '20%', '50%', '20%'],
             y: ['60%', '20%', '40%', '70%', '60%'],
@@ -63,7 +63,7 @@ const Index = () => {
         />
         
         <motion.div 
-          className="absolute w-64 h-64 rounded-full bg-red-500/20 blur-3xl"
+          className="absolute w-64 h-64 rounded-full bg-red-300/20 blur-3xl"
           animate={{
             x: ['70%', '20%', '50%', '30%', '70%'],
             y: ['80%', '30%', '10%', '60%', '80%'],
