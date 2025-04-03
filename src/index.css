@@ -90,5 +90,49 @@
 }
 
 .lava-lamp-background {
-  background: linear-gradient(135deg, rgba(234, 56, 76, 0.2), rgba(211, 16, 39, 0.1));
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(234, 56, 76, 0.2));
+}
+
+/* Enhanced lava lamp animations */
+@keyframes bubble-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.1); }
+}
+
+.lava-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent);
+  filter: blur(8px);
+  animation: bubble-float 12s ease-in-out infinite;
+}
+
+.lava-bubble:nth-child(odd) {
+  animation-duration: 18s;
+}
+
+.lava-bubble:nth-child(3n) {
+  animation-duration: 15s;
+  animation-delay: 2s;
+}
+
+.lava-bubble:nth-child(4n) {
+  animation-duration: 20s;
+  animation-delay: 4s;
+}
+
+/* Section styling enhancements */
+section {
+  position: relative;
+  z-index: 10;
+}
+
+/* Card hover effects */
+.mood-card, .genre-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mood-card:hover, .genre-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }

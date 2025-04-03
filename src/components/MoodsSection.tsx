@@ -23,7 +23,7 @@ const SectionHeader = ({ title, subtitle, action }: SectionHeaderProps) => (
 
 const MoodsSection = () => {
   return (
-    <section className="py-12 bg-gray-50/50">
+    <section className="py-12 bg-white bg-opacity-80 backdrop-blur-sm relative z-10">
       <div className="container px-4">
         <SectionHeader 
           title="Music by Mood" 
