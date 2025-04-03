@@ -1,143 +1,71 @@
 
 import { Track } from './types';
 
+// Top 10 charts
 export const topCharts: Track[] = [
   {
     id: "chart1",
-    title: "TEXAS HOLD 'EM",
-    artist: "Beyoncé",
-    artistImage: "https://images.unsplash.com/photo-1618224665987-d2dcb343059a?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/f87171/ffffff?text=Beyoncé",
-    duration: "3:57",
-    plays: "5.2M"
+    title: "Blinding Lights",
+    artist: "The Weeknd",
+    artistImage: "https://images.unsplash.com/photo-1643538661643-bff0756fb238?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fHRoZSUyMHdlZWtuZHxlbnwwfHwwfHx8MA%3D%3D",
+    cover: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZGFyayUyMGFsYnVtfGVufDB8fDB8fHww",
+    duration: "3:22",
+    plays: "3.2B",
+    preview_url: "https://p.scdn.co/mp3-preview/505483c4870b92d7383ed9aafffe98f288c78412"
   },
   {
     id: "chart2",
-    title: "Die With A Smile",
-    artist: "Lady Gaga & Bruno Mars",
-    artistImage: "https://images.unsplash.com/photo-1618826579934-a3fac9225ce3?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/fbbf24/ffffff?text=Lady+Gaga",
-    duration: "3:58",
-    plays: "4.7M"
+    title: "Shape of You",
+    artist: "Ed Sheeran",
+    artistImage: "https://images.unsplash.com/photo-1593698054509-8a169c287096?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fHNpbmdlcnxlbnwwfHwwfHx8MA%3D%3D",
+    cover: "https://images.unsplash.com/photo-1458560871784-56d23406c091?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGFjb3VzdGljJTIwZ3VpdGFyfGVufDB8fDB8fHww",
+    duration: "3:53",
+    plays: "3.1B",
+    preview_url: "https://p.scdn.co/mp3-preview/07c282f4785bdc6c10e76304ba82ce6cf68f7c3a"
   },
   {
     id: "chart3",
-    title: "Not Like Us",
-    artist: "Kendrick Lamar",
-    artistImage: "https://images.unsplash.com/photo-1618224096041-03ac9069388f?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/ef4444/ffffff?text=Kendrick",
-    duration: "3:27",
-    plays: "4.3M"
-  },
-  {
-    id: "chart4",
-    title: "Espresso",
-    artist: "Sabrina Carpenter",
-    artistImage: "https://images.unsplash.com/photo-1534960522182-bb0bb00c9197?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/e11d48/ffffff?text=Sabrina",
-    duration: "2:33",
-    plays: "4.2M"
-  },
-  {
-    id: "chart5",
-    title: "We Can't Be Friends",
-    artist: "Ariana Grande",
-    artistImage: "https://images.unsplash.com/photo-1535712593684-dd9bd32a7280?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/f43f5e/ffffff?text=Ariana",
-    duration: "3:31",
-    plays: "3.9M"
-  },
-  {
-    id: "chart6",
-    title: "Lovin On Me",
-    artist: "Jack Harlow",
-    artistImage: "https://images.unsplash.com/photo-1523583798162-adbcedfe1c9e?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/be123c/ffffff?text=Jack+H",
-    duration: "2:52",
-    plays: "3.7M"
-  },
-  {
-    id: "chart7",
-    title: "Good Luck, Babe!",
-    artist: "Chappell Roan",
-    artistImage: "https://images.unsplash.com/photo-1537700668413-fd23c66769f4?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/be123c/ffffff?text=Chappell",
-    duration: "3:37",
-    plays: "3.5M"
-  },
-  {
-    id: "chart8",
-    title: "Fortnight",
-    artist: "Taylor Swift",
-    artistImage: "https://images.unsplash.com/photo-1615809398537-8695989a1b4f?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/fb923c/ffffff?text=Taylor+Swift",
-    duration: "4:12",
-    plays: "3.3M"
-  },
-  {
-    id: "chart9",
-    title: "Saturn",
-    artist: "SZA",
-    artistImage: "https://images.unsplash.com/photo-1548661574-c1197c82654d?w=150&h=150&fit=crop&auto=format", 
-    cover: "https://placehold.co/400x400/7e69ab/ffffff?text=SZA",
-    duration: "3:04",
-    plays: "3.1M"
-  },
-  {
-    id: "chart10",
-    title: "Redrum",
-    artist: "21 Savage",
-    artistImage: "https://images.unsplash.com/photo-1543523195-e978d6ffcff9?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/dc2626/ffffff?text=21+Savage",
-    duration: "3:46",
-    plays: "3.0M"
+    title: "Someone Like You",
+    artist: "Adele",
+    artistImage: "https://images.unsplash.com/photo-1543486958-158c5e4f1a83?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fHNpbmdlcnxlbnwwfHwwfHx8MA%3D%3D",
+    cover: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGlhbm98ZW58MHx8MHx8fDA%3D",
+    duration: "4:45",
+    plays: "1.8B",
+    preview_url: "https://p.scdn.co/mp3-preview/5d7762df4688e4a90cd9dff51d6c1c4b5ee89098"
   }
 ];
 
+// Top 50 charts - this is a subset for display purposes
 export const top50Chart: Track[] = [
+  ...topCharts,
   {
-    id: "chart11",
-    title: "Snooze",
-    artist: "SZA",
-    artistImage: "https://images.unsplash.com/photo-1548661574-c1197c82654d?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/7e69ab/ffffff?text=SZA",
-    duration: "3:22",
-    plays: "2.9M"
+    id: "chart4",
+    title: "Dance Monkey",
+    artist: "Tones and I",
+    artistImage: "https://images.unsplash.com/photo-1524207874394-5ec7c8c8e1a6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzR8fHdvbWFuJTIwc2luZ2VyfGVufDB8fDB8fHww",
+    cover: "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhbmNlJTIwbW9ua2V5fGVufDB8fDB8fHww",
+    duration: "3:29",
+    plays: "2.6B",
+    preview_url: "https://p.scdn.co/mp3-preview/4d06c54539fe2a9dc82d0893e453d107d99c4703"
   },
   {
-    id: "chart12",
-    title: "Water",
-    artist: "Tyla",
-    artistImage: "https://images.unsplash.com/photo-1527697911963-13e7f5f12cf4?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/fb7185/ffffff?text=Tyla",
-    duration: "3:22",
-    plays: "2.8M"
+    id: "chart5",
+    title: "Bad Guy",
+    artist: "Billie Eilish",
+    artistImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHdvbWFufGVufDB8fDB8fHww",
+    cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZGFyayUyMGdyZWVufGVufDB8fDB8fHww",
+    duration: "3:14",
+    plays: "2.4B",
+    preview_url: "https://p.scdn.co/mp3-preview/6e0a996a29ac54ce83f912a652252daac44efe12"
   },
   {
-    id: "chart13",
-    title: "Harley Quinn",
-    artist: "Feid & ATL Jacob",
-    artistImage: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/9f1239/ffffff?text=Feid",
-    duration: "3:10",
-    plays: "2.7M"
-  },
-  {
-    id: "chart14",
-    title: "Paint The Town Red",
-    artist: "Doja Cat",
-    artistImage: "https://images.unsplash.com/photo-1622322062536-45abcaabfead?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/f97316/ffffff?text=Doja+Cat",
-    duration: "3:05",
-    plays: "2.6M"
-  },
-  {
-    id: "chart15",
-    title: "Rich Baby Daddy",
-    artist: "Drake ft. Sexyy Red & SZA",
-    artistImage: "https://images.unsplash.com/photo-1615386612448-15c891328d97?w=150&h=150&fit=crop&auto=format",
-    cover: "https://placehold.co/400x400/a855f7/ffffff?text=Drake",
-    duration: "4:18",
-    plays: "2.5M"
+    id: "chart6",
+    title: "Starboy",
+    artist: "The Weeknd",
+    artistImage: "https://images.unsplash.com/photo-1643538661643-bff0756fb238?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fHRoZSUyMHdlZWtuZHxlbnwwfHwwfHx8MA%3D%3D",
+    cover: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3RhcnN8ZW58MHx8MHx8fDA%3D",
+    duration: "3:50",
+    plays: "2.3B",
+    preview_url: "https://p.scdn.co/mp3-preview/8bfb75894243f398335db3817019ba89fecf671d"
   }
 ];
