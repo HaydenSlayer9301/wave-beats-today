@@ -4,8 +4,11 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import TrendingSection from '@/components/TrendingSection';
 import GenresSection from '@/components/GenresSection';
-import PlayerBar from '@/components/PlayerBar';
+import ArtistsSection from '@/components/ArtistsSection';
+import MoodsSection from '@/components/MoodsSection';
 import NewsletterSection from '@/components/NewsletterSection';
+import PlayerBar from '@/components/PlayerBar';
+import InstallApp from '@/components/InstallApp';
 import { motion } from 'framer-motion';
 
 const Index = () => {
@@ -51,9 +54,12 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <TrendingSection />
+      <ArtistsSection />
       <GenresSection />
+      <MoodsSection />
       <NewsletterSection />
       <PlayerBar />
+      <InstallApp />
     </div>
   );
 };

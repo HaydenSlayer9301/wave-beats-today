@@ -1,4 +1,3 @@
-
 // Define all shared types here
 export interface Track {
   id: string;
@@ -34,4 +33,6 @@ export interface FeaturedArtist {
   name: string;
   image: string;
   genre: string;
+  followers?: string;
+  bio?: string;
 }
