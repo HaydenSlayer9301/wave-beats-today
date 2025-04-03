@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { topHits } from '@/data/tracks';
@@ -7,13 +7,33 @@ import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   const featuredTrack = topHits[0];
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Track mouse position when hovering over the section
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+    if (!isHovering) setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section 
+      className="relative overflow-hidden py-16 md:py-24"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Enhanced animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-rose-500 -z-10">
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-800 to-rose-800 -z-10">
         <motion.div 
-          className="absolute w-64 h-64 rounded-full bg-orange-400/50 blur-3xl"
+          className="absolute w-64 h-64 rounded-full bg-orange-700/60 blur-3xl"
           animate={{
             x: ['5%', '30%', '15%', '40%', '5%'],
             y: ['10%', '30%', '60%', '20%', '10%'],
@@ -27,7 +47,7 @@ const HeroSection = () => {
         />
         
         <motion.div 
-          className="absolute w-72 h-72 rounded-full bg-rose-500/40 blur-3xl"
+          className="absolute w-72 h-72 rounded-full bg-rose-700/50 blur-3xl"
           animate={{
             x: ['70%', '40%', '60%', '30%', '70%'],
             y: ['20%', '50%', '30%', '60%', '20%'],
@@ -42,7 +62,7 @@ const HeroSection = () => {
         />
         
         <motion.div 
-          className="absolute w-80 h-80 rounded-full bg-amber-400/30 blur-3xl"
+          className="absolute w-80 h-80 rounded-full bg-amber-700/40 blur-3xl"
           animate={{
             x: ['35%', '65%', '25%', '55%', '35%'],
             y: ['60%', '20%', '40%', '70%', '60%'],
@@ -55,6 +75,51 @@ const HeroSection = () => {
             delay: 2
           }}
         />
+        
+        {/* Cursor following bubbles */}
+        {isHovering && (
+          <>
+            <motion.div
+              className="absolute w-32 h-32 rounded-full bg-rose-800/70 blur-xl pointer-events-none"
+              animate={{
+                x: mousePosition.x - 64,
+                y: mousePosition.y - 64,
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                x: { duration: 0.2, ease: "easeOut" },
+                y: { duration: 0.2, ease: "easeOut" },
+                scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+              }}
+            />
+            <motion.div
+              className="absolute w-24 h-24 rounded-full bg-orange-900/60 blur-xl pointer-events-none"
+              animate={{
+                x: mousePosition.x - 48,
+                y: mousePosition.y - 48,
+                scale: [1.1, 1, 1.1],
+              }}
+              transition={{
+                x: { duration: 0.3, ease: "easeOut" },
+                y: { duration: 0.3, ease: "easeOut" },
+                scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+              }}
+            />
+            <motion.div
+              className="absolute w-16 h-16 rounded-full bg-amber-800/50 blur-lg pointer-events-none"
+              animate={{
+                x: mousePosition.x - 32,
+                y: mousePosition.y - 32,
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                x: { duration: 0.4, ease: "easeOut" },
+                y: { duration: 0.4, ease: "easeOut" },
+                scale: { duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }
+              }}
+            />
+          </>
+        )}
       </div>
       
       <div className="container px-4 relative z-10">
