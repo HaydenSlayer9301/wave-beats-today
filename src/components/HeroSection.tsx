@@ -3,16 +3,58 @@ import React from 'react';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { topHits } from '@/data/tracks';
+import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   const featuredTrack = topHits[0];
 
   return (
-    <section className="relative overflow-hidden hero-gradient py-16 md:py-24">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-white/30 blur-3xl" />
-        <div className="absolute top-1/2 -right-24 w-80 h-80 rounded-full bg-white/20 blur-3xl" />
+    <section className="relative overflow-hidden py-16 md:py-24">
+      {/* Enhanced animated background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-rose-500 -z-10">
+        <motion.div 
+          className="absolute w-64 h-64 rounded-full bg-orange-400/50 blur-3xl"
+          animate={{
+            x: ['5%', '30%', '15%', '40%', '5%'],
+            y: ['10%', '30%', '60%', '20%', '10%'],
+            scale: [1, 1.2, 1.1, 1.3, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        
+        <motion.div 
+          className="absolute w-72 h-72 rounded-full bg-rose-500/40 blur-3xl"
+          animate={{
+            x: ['70%', '40%', '60%', '30%', '70%'],
+            y: ['20%', '50%', '30%', '60%', '20%'],
+            scale: [1.2, 1, 1.3, 0.9, 1.2],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        
+        <motion.div 
+          className="absolute w-80 h-80 rounded-full bg-amber-400/30 blur-3xl"
+          animate={{
+            x: ['35%', '65%', '25%', '55%', '35%'],
+            y: ['60%', '20%', '40%', '70%', '60%'],
+            scale: [1, 1.4, 1.2, 1, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
       </div>
       
       <div className="container px-4 relative z-10">
